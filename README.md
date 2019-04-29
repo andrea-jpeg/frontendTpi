@@ -1,2 +1,0 @@
-# frontendTpi
-Created with CodeSandbox
