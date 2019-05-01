@@ -1,4 +1,4 @@
-const url = 'https://3000-c60bc18b-d2bb-42ca-9b10-6b9085418f0b.ws-eu0.gitpod.io';
+const url = 'https://3000-b6a8fdbd-079d-487c-b6b4-6e439ace656b.ws-eu0.gitpod.io';
 class Fetch{
 
     static registration(nome, cognome, email, password){
@@ -12,8 +12,9 @@ class Fetch{
                         'cognome': cognome,
                         'email': email,
                         'password': password
-                    })
-                }).then(res => res.json()))
+                        })
+                    }).then(res => res.json())
+                )
             })
         )
     }
