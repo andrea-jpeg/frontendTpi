@@ -20,6 +20,8 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 
+import Fetch from '../script/Fetch.js';
+
 const styles = theme => ({
   root: {
     display: "flex",
@@ -53,21 +55,29 @@ const styles = theme => ({
 
 class OutlinedInputAdornments extends React.Component {
   state = {
-    amount: "",
-    password: "",
-    weight: "",
-    weightRange: "",
-    weigh: "",
-    showPassword: false
+    nome: "",
+    cognome: '',
+    registrationEmail: '',
+    registrationPassword: '',
+    loginEmail: '',
+    loginPassword: '',
+    showRegistrationPassword: false,
+    showLoginPassword: false,
   };
 
   handleChange = prop => event => {
     this.setState({ [prop]: event.target.value });
   };
 
-  handleClickShowPassword = () => {
-    this.setState(state => ({ showPassword: !state.showPassword }));
-  };
+  handleRegistration(){
+      Fetch.registration(this.state.nome, this.state.cognome, this.state.registrationEmail, this.state.registrationPassword)
+        .then(res => console.log(res))
+  }
+
+  handleLogin(){
+      Fetch.login(this.state.loginEmail, this.state.loginPassword)
+        .then(res => console.log(res))
+  }
 
   render() {
     const { classes } = this.props;
@@ -79,6 +89,8 @@ class OutlinedInputAdornments extends React.Component {
           className={classNames(classes.margin, classes.textField)}
           variant="outlined"
           label="NOME"
+          value={this.state.nome}
+          onChange={this.handleChange("nome")}
         />
 
         <TextField
@@ -86,8 +98,8 @@ class OutlinedInputAdornments extends React.Component {
           className={classNames(classes.margin, classes.textField)}
           variant="outlined"
           label="COGNOME"
-          value={this.state.amount}
-          onChange={this.handleChange("amount")}
+          value={this.state.cognome}
+          onChange={this.handleChange("cognome")}
         />
 
         <TextField
@@ -95,32 +107,32 @@ class OutlinedInputAdornments extends React.Component {
           className={classNames(classes.margin, classes.textField)}
           variant="outlined"
           label="EMAIL"
-          value={this.state.weigh}
-          onChange={this.handleChange("weigh")}
+          value={this.state.registrationEmail}
+          onChange={this.handleChange("registrationEmail")}
         />
 
         <TextField
           id="outlined-adornment-password"
           className={classNames(classes.margin, classes.textField)}
           variant="outlined"
-          type={this.state.showPassword ? "text" : "password"}
+          type={this.state.showRegistrationPassword ? "text" : "password"}
           label="Password"
-          value={this.state.password}
-          onChange={this.handleChange("password")}
+          value={this.state.registrationPassword}
+          onChange={this.handleChange("registrationPassword")}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton
                   aria-label="Toggle password visibility"
-                  onClick={this.handleClickShowPassword}
+                  onClick={()=>this.setState(state => ({ showRegistrationPassword: !state.showRegistrationPassword }))}
                 >
-                  {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                  {this.state.showRegistrationPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               </InputAdornment>
             )
           }}
         />
-        <Fab color="primary" aria-label="Add" className={classes.fab}>
+        <Fab color="primary" aria-label="Add" className={classes.fab} onClick={()=>this.handleRegistration()}>
           <AddIcon />
         </Fab>
         <TextField
@@ -128,33 +140,33 @@ class OutlinedInputAdornments extends React.Component {
           className={classNames(classes.margin, classes.textField)}
           variant="outlined"
           label="EMAIL"
-          value={this.state.weight}
-          onChange={this.handleChange("weight")}
+          value={this.state.loginEmail}
+          onChange={this.handleChange("loginEmail")}
         />
 
         <TextField
           id="outlined-adornment-password"
           className={classNames(classes.margin, classes.textField)}
           variant="outlined"
-          type={this.state.showPassword ? "text" : "password"}
+          type={this.state.showLoginPassword ? "text" : "password"}
           label="Password"
-          value={this.state.password}
-          onChange={this.handleChange("password")}
+          value={this.state.loginPassword}
+          onChange={this.handleChange("loginPassword")}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton
                   aria-label="Toggle password visibility"
-                  onClick={this.handleClickShowPassword}
+                  onClick={()=>this.setState(state => ({ showLoginPassword: !state.showLoginPassword }))}
                 >
-                  {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                  {this.state.showLoginPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               </InputAdornment>
             )
           }}
         />
 
-        <Fab color="secondary" aria-label="Edit" className={classes.fab}>
+        <Fab color="secondary" aria-label="Edit" className={classes.fab} onClick={()=>this.handleLogin()}>
           <Fingerprint />
         </Fab>
         <GridList className={classes.gridList} cols={2.5} />
@@ -175,7 +187,7 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 50,
   },
   bottoni:{
-    
+
   },
   root: {
     display: 'flex',

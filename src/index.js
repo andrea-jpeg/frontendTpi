@@ -9,7 +9,8 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" component={PrenotazioniPage} />
+        <Route path="/" component={MainPage} />
+        <Route path='/prenotazioni' component={PrenotazioniPage}/>
       </Switch>
     </BrowserRouter>
   );
