@@ -14,7 +14,7 @@ function App() {
         <Route path="/" exact component={MainPage} />
         <Route  path="/prenotazioni" exact component={PrenotazioniPage}/>
         <Route path ="/registrazione" exact component={Registration}/>
-        <Route path = '/addPrentazione' exact component={AddPrenotazione}/>
+        <Route path = '/addPrenotazione' exact component={AddPrenotazione}/>
       </Switch>
     </BrowserRouter>
   );
