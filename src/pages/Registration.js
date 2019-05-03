@@ -12,6 +12,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
+import GridListTileBar from '@material-ui/core/GridListTileBar';
+import IconButton from '@material-ui/core/IconButton';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 const styles = theme => ({
   main: {
@@ -43,10 +48,48 @@ const styles = theme => ({
   submit: {
     marginTop: theme.spacing.unit * 3,
   },
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper,
+  },
+  gridList: {
+    flexWrap: 'nowrap',
+    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+    transform: 'translateZ(0)',
+  },
+  title: {
+    color: theme.palette.primary.light,
+  },
+  titleBar: {
+    background:
+      'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+  },
 });
 
-function SignIn(props) {
-  const { classes } = props;
+class Registration extends React.Component {
+ render(){
+  const { classes } = this.props;
+
+  let tileData = [{
+      title: "notte blu",
+      titleBar: "piscina con lettini",
+      img: "http://img.archiexpo.it/images_ae/photo-g/133427-8330243.jpg"
+  },
+  {
+      title: "idromassaggio",
+      titleBar: "idromassaggio",
+      img: "https://www.sanguineto.it/images/phocagallery/centro_benessere/centro-benessere-montepulciano.jpg"
+  },
+  {
+      title: "massaggi schina",
+      titleBar: "massaggi schiena",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqqDRGyDBKgrpxMBKxKpD_EQFuoZ59AeS617gZToLFp9d5qHPd"
+
+  }
+  ];
 
   return (
     <main className={classes.main}>
@@ -64,17 +107,18 @@ function SignIn(props) {
             <Input id="email" name="email" autoComplete="email" autoFocus />
           </FormControl>
            <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="nome">Email Address</InputLabel>
+            <InputLabel htmlFor="nome">nome</InputLabel>
             <Input id="name" name="name" autoComplete="name" autoFocus />
+          </FormControl>
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel htmlFor="cognome">cognome</InputLabel>
+            <Input id="cognome" name="cognme" autoComplete="cognome" autoFocus />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="password">Password</InputLabel>
             <Input name="password" type="password" id="password" autoComplete="current-password" />
           </FormControl>
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
+
           <Button
             type="submit"
             fullWidth
@@ -86,12 +130,32 @@ function SignIn(props) {
           </Button>
         </form>
       </Paper>
+
+      <div className={classes.root}>
+      <GridList className={classes.gridList} cols={2.5}>
+        {tileData.map(tile => (
+          <GridListTile key={tile.img}>
+            <img src={tile.img} alt={tile.title} />
+            <GridListTileBar
+              title={tile.title}
+              classes={{
+                root: classes.titleBar,
+                title: classes.title,
+              }}
+              actionIcon={
+                <IconButton>
+                  <StarBorderIcon className={classes.title} />
+                </IconButton>
+              }
+            />
+          </GridListTile>
+        ))}
+      </GridList>
+    </div>
     </main>
   );
 }
+}
 
-SignIn.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
-export default withStyles(styles)(SignIn);
+export default withStyles(styles)(Registration);

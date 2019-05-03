@@ -4,6 +4,7 @@ import MainPage from "./pages/MainPage.js";
 import PrenotazioniPage from "./pages/PrenotazioniPage.js";
 import { BrowserRouter, Route, Switch } from "react-router-dom"; //{}=variabile
 import "./styles.css";
+import Registration from "./pages/Registration.js";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={MainPage} />
         <Route  path="/prenotazioni" exact component={PrenotazioniPage}/>
+        <Route path ="/registrazione" exact component={Registration}/>
       </Switch>
     </BrowserRouter>
   );
