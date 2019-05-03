@@ -76,7 +76,7 @@ class Registration extends React.Component {
   let tileData = [{
       title: "notte blu",
       titleBar: "piscina con lettini",
-      img: "http://img.archiexpo.it/images_ae/photo-g/133427-8330243.jpg"
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHapchqHryZQtRHaw_Pzvag8b6OhpBSANmIfm64ho7lOPl30P5"
   },
   {
       title: "idromassaggio",
@@ -88,16 +88,29 @@ class Registration extends React.Component {
       titleBar: "massaggi schiena",
       img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqqDRGyDBKgrpxMBKxKpD_EQFuoZ59AeS617gZToLFp9d5qHPd"
 
+  },
+  {
+      title: "viso",
+      titleBar: "trattamenti viso",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuMZ1W2T1Gn3oeAEssFvByJYxW_r7BYCkfpOIVcWfHXqu98gwb"
+  },
+  {
+      title: "BELLEZZA",
+      titleBar: "bellezza",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDtJwk4QoITQpr9LmaxxwC-CinfG5wnA3C-6TXoWm1xcsgfTwr"
   }
   ];
 
   return (
     <main className={classes.main}>
+
       <CssBaseline />
       <Paper className={classes.paper}>
+      <p>BENVENUTI</p>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
+
         <Typography component="h1" variant="h5">
           sign up
         </Typography>
@@ -128,7 +141,17 @@ class Registration extends React.Component {
           >
             Sign in
           </Button>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="secondary"
+            className={classes.submit}
+          >
+            sing up
+          </Button>
         </form>
+
       </Paper>
 
       <div className={classes.root}>
@@ -151,6 +174,7 @@ class Registration extends React.Component {
           </GridListTile>
         ))}
       </GridList>
+
     </div>
     </main>
   );
