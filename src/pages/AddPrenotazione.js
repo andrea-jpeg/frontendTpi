@@ -10,7 +10,12 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
-
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Button from '@material-ui/core/Button';
+import Fetch from '../script/Fetch.js';
+import { Redirect } from 'react-router-dom';
 
 
 const styles = theme => ({
@@ -30,10 +35,42 @@ const styles = theme => ({
       },
     typography:{
         padding: `${theme.spacing.unit * 4}px ${theme.spacing.unit * 4}px ${theme.spacing.unit * 3}px`,
-    }
+    },
+    margin: {
+    margin: theme.spacing.unit,
+  },
+
+  textField: {
+    flexBasis: 200,
+  },
+  button: {
+    margin: theme.spacing.unit,
+  },
 });
 
-
+const ranges = [
+    {
+        value: '5',
+    },
+    {
+        value: '10',
+    },
+    {
+        value: '20',
+    },
+    {
+        value: '30',
+    },
+    {
+        value: '40',
+    },
+    {
+        value: '60',
+    },
+    {
+        value: '120',
+    },
+]
 
 class AddPrenotazione extends React.Component{
 
@@ -50,6 +87,7 @@ class AddPrenotazione extends React.Component{
             sabato: false,
             domenica: false,
             intervalloMinuti: 0,
+            redirect: '',
         }
     }
 
@@ -57,6 +95,28 @@ class AddPrenotazione extends React.Component{
     this.setState({ [name]: event.target.checked });
   };
 
+  handleChangeName = prop => event => {
+    this.setState({ [prop]: event.target.value });
+  };
+
+    handleSubmit(){
+        var giorni = '';
+        if(this.state.lunedi) giorni += 'lunedi,';
+        if(this.state.martedi) giorni += 'martedi,';
+        if(this.state.mercoledi) giorni += 'mercoledi,';
+        if(this.state.giovedi) giorni += 'giovedi,';
+        if(this.state.venerdi) giorni += 'venerdi,';
+        if(this.state.sabato) giorni += 'sabato,';
+        if(this.state.domenica) giorni += 'domenica,';
+        if(giorni.length > 0) giorni.substr(0, giorni.length-1); // per canellare l'ultima virgola in eccesso
+        console.log(localStorage.getItem('token'));
+        if(localStorage.getItem('token') === 'null'){
+            localStorage.setItem('linkThenLogin', '/addPrenotazione');
+            this.setState({redirect: '/'})
+        }
+        else
+            Fetch.addEvento(localStorage.getItem('token'), this.state.startDate, this.state.finishDate, giorni, this.state.intervalloMinuti)
+    }
 
 
     render(){
@@ -65,6 +125,8 @@ class AddPrenotazione extends React.Component{
         /*<MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <Calendar {...{date: this.state.value, onChange:(date, isFinish)=>{this.setState({value: date})}}}/>
                 </MuiPickersUtilsProvider>*/
+        if(this.state.redirect !== '')
+            return (<Redirect push to={this.state.redirect}/>);
 
         return(
             <Paper className = {classes.paper} elevation={4}>
@@ -132,7 +194,28 @@ class AddPrenotazione extends React.Component{
                         value="domenica"
                     /> domenica
                 </Typography>
-
+                <Typography>
+                inserire intervallo di tempo tra un incontro e l'altro:
+                    <TextField
+                    select
+                    label=""
+                    className={(classes.margin, classes.textField)}
+                    value={this.state.intervalloMinuti}
+                    onChange={this.handleChangeName('intervalloMinuti')}
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end">min</InputAdornment>,
+                    }}
+                    >
+                    {ranges.map(option => (
+                        <MenuItem key={option.value} value={option.value}>
+                        {option.value}
+                        </MenuItem>
+                    ))}
+                    </TextField>
+                </Typography>
+                <Button variant="contained" className={classes.button} onClick={()=>this.handleSubmit()}>
+                    Invia
+                </Button>
             </Paper>
         )
     }

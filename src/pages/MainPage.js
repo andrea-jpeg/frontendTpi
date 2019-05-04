@@ -17,6 +17,8 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
+import Fetch from '../script/Fetch.js';
+import { Redirect } from 'react-router-dom';
 
 const styles = theme => ({
   main: {
@@ -50,8 +52,40 @@ const styles = theme => ({
   },
 });
 
-function SignIn(props) {
-  const { classes } = props;
+class SignIn extends React.Component{
+
+    constructor(props){
+        super(props)
+        this.state = {
+            email: '',
+            password: '',
+            redirect: '',
+        }
+    }
+
+    handleSubmit(e){
+        e.preventDefault();
+        console.log('prova')
+        Fetch.login(this.state.email, this.state.password)
+            .then(res => {
+                console.log(res)
+                if(res.errore !== undefined){
+                    localStorage.setItem('token', res.token)
+                    console.log('loggato')
+                } //gestione dell'errore nell'else l'errore sarà contenuto in res.errore, cancellare i campi e visualizzare l'errore
+            });
+
+        if(localStorage.getItem('linkThenLogin') !== 'null'){
+            var link = localStorage.getItem('linkThenLogin');
+            localStorage.setItem('linkThenLogin', null);
+            this.setState({redirect: link});
+        }
+    }
+
+    render(){
+  const { classes } = this.props;
+
+
    let tileData = [{
       title: "notte blu",
       titleBar: "piscina con lettini",
@@ -80,6 +114,9 @@ function SignIn(props) {
   }
   ];
 
+  if(this.state.redirect !== '')
+    return (<Redirect push to={this.state.redirect}/>)
+
   return (
     <main className={classes.main}>
       <CssBaseline />
@@ -90,14 +127,14 @@ function SignIn(props) {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form}>
+        <form className={classes.form} onSubmit={(e)=>this.handleSubmit(e)}>
           <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input id="email" name="email" autoComplete="email" autoFocus />
+            <InputLabel htmlFor="email" >Email Address</InputLabel>
+            <Input id="email" name="email" onChange={(e)=>this.setState({email: e.target.value})} autoComplete="email" autoFocus value={this.state.email}  />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="password">Password</InputLabel>
-            <Input name="password" type="password" id="password" autoComplete="current-password" />
+            <Input name="password" type="password" id="password" onChange={(e)=>this.setState({password: e.target.value})} value={this.state.password} autoComplete="current-password" />
           </FormControl>
 
           <Button
@@ -114,10 +151,7 @@ function SignIn(props) {
     </main>
 
   );
-}
+}}
 
-SignIn.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(SignIn);
