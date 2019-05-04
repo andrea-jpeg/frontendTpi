@@ -55,4 +55,15 @@ class Fetch{
 
     }
 
+    static getEventi(){
+        return new Promise((resolve, reject)=>{
+            resolve(
+                fetch(url+'/evento', {
+                    method: 'GET',
+                    headers: {'Content-Type':'application/json'},
+                }).then(res => res.json())
+            )
+        })
+    }
+
 }export default Fetch
