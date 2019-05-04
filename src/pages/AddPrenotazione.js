@@ -49,7 +49,7 @@ class AddPrenotazione extends React.Component{
             venerdi: false,
             sabato: false,
             domenica: false,
-            value: new Date(),
+            intervalloMinuti: 0,
         }
     }
 
@@ -71,12 +71,27 @@ class AddPrenotazione extends React.Component{
                 <Typography variant='h2'>Inserire disponibilità appuntamenti</Typography>
                 <Typography className={classes.typography}>Data di inizio disponibilità:
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <DateTimePicker value={this.state.startDate} onChange={(date)=>this.setState({startDate: date})} />
+                        <DateTimePicker
+                        value={this.state.startDate}
+                        onChange={(date)=>this.setState({startDate: date})}
+                        ampm = {false}
+                        animateYearScrolling
+                        disablePast
+                        minutesStep = {5}
+                        />
                     </MuiPickersUtilsProvider>
                 </Typography>
                 <Typography className={classes.typography}>Data di fine disponibilità:
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <DateTimePicker value={this.state.finishDate} onChange={(date)=>this.setState({finishDate: date})} />
+                        <DateTimePicker
+                        value={this.state.finishDate}
+                        onChange={(date)=>this.setState({finishDate: date})}
+                        ampm = {false}
+                        animateYearScrolling
+                        disablePast
+                        minutesStep = {5}
+                        minDate = {this.state.startDate}
+                         />
                     </MuiPickersUtilsProvider>
                 </Typography>
                 <Typography>Seleziona i giorni da escludere:</Typography>
