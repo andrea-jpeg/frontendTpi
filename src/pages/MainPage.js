@@ -65,11 +65,10 @@ class SignIn extends React.Component{
 
     handleSubmit(e){
         e.preventDefault();
-        console.log('prova')
         Fetch.login(this.state.email, this.state.password)
             .then(res => {
-                console.log(res)
-                if(res.errore !== undefined){
+                console.log(res.errore)
+                if(res.token !== undefined){
                     localStorage.setItem('token', res.token)
                     console.log('loggato')
                 } //gestione dell'errore nell'else l'errore sarà contenuto in res.errore, cancellare i campi e visualizzare l'errore

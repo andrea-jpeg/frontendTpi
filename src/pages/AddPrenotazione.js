@@ -116,6 +116,7 @@ class AddPrenotazione extends React.Component{
         }
         else
             Fetch.addEvento(localStorage.getItem('token'), this.state.startDate, this.state.finishDate, giorni, this.state.intervalloMinuti)
+                .then(res => console.log(res))
     }
 
 

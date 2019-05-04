@@ -1,4 +1,4 @@
-const url = 'https://3000-ffa0916f-ba3e-4808-a22f-832848108c6b.ws-eu0.gitpod.io';
+const url = 'https://3000-e0b7f8f2-9c1d-4292-a47e-f12ee77a8933.ws-eu0.gitpod.io';
 class Fetch{
 
     static registration(nome, cognome, email, password){
@@ -39,7 +39,7 @@ class Fetch{
                 fetch(url+'/evento', {
                     method: 'POST',
                     headers: new Headers({
-                            'Authorization': 'Bearer'+ token,
+                            'Authorization': 'Bearer '+ token,
                             'Content-Type':'application/json'
                     }),
                     body: JSON.stringify({
