@@ -21,6 +21,7 @@ import {
   Calendar,
   usePickerState,
 } from "@material-ui/pickers";
+import IconButton from '@material-ui/core/IconButton';
 
 const styles = {
   card: {
@@ -54,6 +55,7 @@ class EventoPage extends React.Component{
             dataInizio: new Date(),
             maxDate: new Date(),
             minDate: new Date(),
+            giorni: [],
         }
     }
 
@@ -63,12 +65,27 @@ class EventoPage extends React.Component{
     }
 
     handlePrenotazione(elemento){
+        var giorni= [];
+        elemento.giorniNonDisponibili.split(',').forEach((giorno)=>{
+            if(giorno === 'lunedi') giorni.push(1);
+            if(giorno === 'martedi') giorni.push(2);
+            if(giorno === 'mercoledi') giorni.push(3);
+            if(giorno === 'giovedi') giorni.push(4);
+            if(giorno === 'venerdi') giorni.push(5);
+            if(giorno === 'sabato') giorni.push(6);
+            if(giorno === 'domenica') giorni.push(0);
+        })
         this.setState({
             open: true, 
             id: elemento.id_evento,
             minDate: elemento.dataInizio,
             maxDate: elemento.dataFine,
+            giorni: giorni,
             });
+    }
+
+    handleGiorni(){
+
     }
 
     handleClose = () => {
@@ -97,6 +114,7 @@ class EventoPage extends React.Component{
                 <Calendar {...{date: this.state.dataInizio, onChange:(date, isFinish)=>{this.setState({dataInizio: date})}}}
                 maxDate = {this.state.maxDate}
                 minDate = {this.state.minDate}
+                renderDay = {(day,selectedDate, dayInCurrentMonth, dayComponent)=> this.state.giorni.includes(day.getDay()) ? <IconButton disabled/> : dayComponent}
                 />
             </MuiPickersUtilsProvider>
           </DialogContent>
@@ -114,9 +132,9 @@ class EventoPage extends React.Component{
         return (
             <div>
             {jsx}
-            <Grid container spacing={24}>
-            {this.state.eventi.map((elemento) =>
-                <Grid item xs spacing = {12}>
+            <Grid container spacing={5}>
+            {this.state.eventi.map((elemento, i) =>
+                <Grid item xs key={i}>
                 <Card className={classes.card}>
                 <CardContent>
                     <Typography variant="h5" component="h2">
