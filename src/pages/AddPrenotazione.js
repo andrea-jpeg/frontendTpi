@@ -220,15 +220,16 @@ class AddPrenotazione extends React.Component{
                     Invia
                 </Button>
                   <Paper className = {classes.paper} elevation={4}>
-                  <Typography variant='h2'>LUNEDI : 8:00-18.00 </Typography>
-                  <Typography variant='h2'>MARTEDI : 8:00-18.00</Typography>
-                  <Typography variant='h2'>MERCOLEDI : 8:00-18.00</Typography>
-                  <Typography variant='h2'>GIOVEDI : 8:00-18.00</Typography>
-                  <Typography variant='h2'>VENERDI : 8:00-18.00</Typography>
-                  <Typography variant='h2'>SABATO : 8:00-18.00</Typography>
-                  <Typography variant='h2'>DOMENICA : 8:00-18.00</Typography>
-                  <Typography variant='h2'>LUNEDI : 8:00-18.00</Typography>
-                  <Typography variant='h2'>SE NON PAGHI LE MIE TROIE TI DISFO DI BOTTE</Typography>
+                  <Typography variant='h6'>ORARI: </Typography>
+                  <Typography variant='h6'>LUNEDI : 8:00-18.00 </Typography>
+                  <Typography variant='h6'>MARTEDI : 8:00-18.00</Typography>
+                  <Typography variant='h6'>MERCOLEDI : 8:00-18.00</Typography>
+                  <Typography variant='h6'>GIOVEDI : 8:00-18.00</Typography>
+                  <Typography variant='h6'>VENERDI : 8:00-18.00</Typography>
+                  <Typography variant='h6'>SABATO : 8:00-18.00</Typography>
+                  <Typography variant='h6'>DOMENICA : 8:00-18.00</Typography>
+                  <Typography variant='h6'>LUNEDI : 8:00-18.00</Typography>
+                  <Typography variant='h6'>SE NON PAGHI LE MIE TROIE TI DISFO DI BOTTE</Typography>
 
                   </Paper>
             </Paper>
