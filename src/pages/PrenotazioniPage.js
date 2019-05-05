@@ -27,7 +27,6 @@ const styles = theme => ({
   },
   root: {
       backgroundImage: `url(https://i.pinimg.com/736x/43/f5/a2/43f5a2f1c7eebb1dadb1a597e748ba77.jpg)`,
-
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2
