@@ -20,7 +20,7 @@ import { Redirect } from 'react-router-dom';
 
 const styles = theme => ({
   root: {
-    backgroundImage:'url(https://image.freepik.com/foto-gratuito/rossetto-pennelli-trucco-e-tavolozza-su-sfondo-rosa_23-2147970832.jpg)',
+    backgroundImage:'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3AFYGh4BUEJp1ECvV6EkIA2TbIdo_5-pa2oNQ-b3P0OtQCgK_Eg)',
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
@@ -133,7 +133,7 @@ class AddPrenotazione extends React.Component{
         return(
             <div className = {classes.root}>
             <Paper className = {classes.paper} elevation={4}>
-                <Typography variant='h2'>Inserire disponibilità appuntamenti</Typography>
+                <Typography variant='h2'>REGISTRA APPUNTAMENTO</Typography>
                 <Typography className={classes.typography}>Data di inizio disponibilità:
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <DateTimePicker
@@ -159,7 +159,7 @@ class AddPrenotazione extends React.Component{
                          />
                     </MuiPickersUtilsProvider>
                 </Typography>
-                <Typography>Seleziona i giorni da escludere:</Typography>
+                <Typography>Seleziona i giorni :</Typography>
                 <Typography>
                     <Checkbox
                         checked={this.state.lunedi}
@@ -198,7 +198,7 @@ class AddPrenotazione extends React.Component{
                     /> domenica
                 </Typography>
                 <Typography>
-                inserire intervallo di tempo tra un incontro e l'altro:
+                inserire durata appuntamento desiderata:
                     <TextField
                     select
                     label=""
@@ -229,7 +229,7 @@ class AddPrenotazione extends React.Component{
                   <Typography variant='h6'>SABATO : 8:00-18.00</Typography>
                   <Typography variant='h6'>DOMENICA : 8:00-18.00</Typography>
                   <Typography variant='h6'>LUNEDI : 8:00-18.00</Typography>
-                  <Typography variant='h6'>SE NON PAGHI LE MIE TROIE TI DISFO DI BOTTE</Typography>
+
 
                   </Paper>
             </Paper>
