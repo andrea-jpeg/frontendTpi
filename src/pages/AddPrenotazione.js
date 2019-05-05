@@ -20,6 +20,7 @@ import { Redirect } from 'react-router-dom';
 
 const styles = theme => ({
   root: {
+    backgroundImage:'https://i.pinimg.com/736x/43/f5/a2/43f5a2f1c7eebb1dadb1a597e748ba77.jpg',
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
@@ -130,6 +131,7 @@ class AddPrenotazione extends React.Component{
             return (<Redirect push to={this.state.redirect}/>);
 
         return(
+            <div className = {classes.root}>
             <Paper className = {classes.paper} elevation={4}>
                 <Typography variant='h2'>Inserire disponibilità appuntamenti</Typography>
                 <Typography className={classes.typography}>Data di inizio disponibilità:
@@ -217,7 +219,9 @@ class AddPrenotazione extends React.Component{
                 <Button variant="contained" className={classes.button} onClick={()=>this.handleSubmit()}>
                     Invia
                 </Button>
+
             </Paper>
+            </div>
         )
     }
 }
