@@ -20,6 +20,7 @@ import { Redirect } from 'react-router-dom';
 
 const styles = theme => ({
   root: {
+
     backgroundImage:'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3AFYGh4BUEJp1ECvV6EkIA2TbIdo_5-pa2oNQ-b3P0OtQCgK_Eg)',
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
@@ -134,7 +135,7 @@ class AddPrenotazione extends React.Component{
             <div className = {classes.root}>
             <Paper className = {classes.paper} elevation={4}>
                 <Typography variant='h2'>REGISTRA APPUNTAMENTO</Typography>
-                <Typography className={classes.typography}>Data di inizio disponibilità:
+                <Typography className={classes.typography}>Data disponibilità:
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <DateTimePicker
                         value={this.state.startDate}
@@ -146,19 +147,7 @@ class AddPrenotazione extends React.Component{
                         />
                     </MuiPickersUtilsProvider>
                 </Typography>
-                <Typography className={classes.typography}>Data di fine disponibilità:
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <DateTimePicker
-                        value={this.state.finishDate}
-                        onChange={(date)=>this.setState({finishDate: date})}
-                        ampm = {false}
-                        animateYearScrolling
-                        disablePast
-                        minutesStep = {5}
-                        minDate = {this.state.startDate}
-                         />
-                    </MuiPickersUtilsProvider>
-                </Typography>
+
                 <Typography>Seleziona i giorni :</Typography>
                 <Typography>
                     <Checkbox
