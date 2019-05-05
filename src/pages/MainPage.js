@@ -73,6 +73,32 @@ main: {
   },
 });
 class SignIn extends React.Component{
+      constructor(props){
+        super(props)
+        this.state = {
+            email: '',
+            password: '',
+            redirect: '',
+        }
+    }
+
+    handleSubmit(e){
+        e.preventDefault();
+        Fetch.login(this.state.email, this.state.password)
+            .then(res => {
+                console.log(res.errore)
+                if(res.token !== undefined){
+                    localStorage.setItem('token', res.token)
+                    console.log('loggato')
+                } //gestione dell'errore nell'else l'errore sarà contenuto in res.errore, cancellare i campi e visualizzare l'errore
+            });
+
+        if(localStorage.getItem('linkThenLogin') !== 'null'){
+            var link = localStorage.getItem('linkThenLogin');
+            localStorage.setItem('linkThenLogin', null);
+            this.setState({redirect: link});
+        }
+    }
   render(){
   const { classes } = this.props;
 
@@ -105,32 +131,7 @@ class SignIn extends React.Component{
   }
   ];
 
-    constructor(props){
-        super(props)
-        this.state = {
-            email: '',
-            password: '',
-            redirect: '',
-        }
-    }
 
-    handleSubmit(e){
-        e.preventDefault();
-        Fetch.login(this.state.email, this.state.password)
-            .then(res => {
-                console.log(res.errore)
-                if(res.token !== undefined){
-                    localStorage.setItem('token', res.token)
-                    console.log('loggato')
-                } //gestione dell'errore nell'else l'errore sarà contenuto in res.errore, cancellare i campi e visualizzare l'errore
-            });
-
-        if(localStorage.getItem('linkThenLogin') !== 'null'){
-            var link = localStorage.getItem('linkThenLogin');
-            localStorage.setItem('linkThenLogin', null);
-            this.setState({redirect: link});
-        }
-    }
 
 
 
