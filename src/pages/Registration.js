@@ -76,7 +76,7 @@ class Registration extends React.Component {
   let tileData = [{
       title: "notte blu",
       titleBar: "piscina con lettini",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHapchqHryZQtRHaw_Pzvag8b6OhpBSANmIfm64ho7lOPl30P5"
+      img: "https://www.internationalflora.com/wp-content/uploads/2016/06/fiori-gay.jpg"
   },
   {
       title: "idromassaggio",
