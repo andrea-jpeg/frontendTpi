@@ -176,7 +176,10 @@ class SignIn extends React.Component{
           >
             sing up
           </Button>
-           <div className={classes.root}>
+
+        </form>
+      </Paper>
+       <div className={classes.root}>
       <GridList className={classes.gridList} cols={2.5}>
         {tileData.map(tile => (
           <GridListTile key={tile.img}>
@@ -198,8 +201,6 @@ class SignIn extends React.Component{
       </GridList>
 
     </div>
-        </form>
-      </Paper>
     </main>
 
   );
