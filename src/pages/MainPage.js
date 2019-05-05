@@ -20,8 +20,10 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 import Fetch from '../script/Fetch.js';
 import { Redirect } from 'react-router-dom';
 
+
 const styles = theme => ({
-  main: {
+
+main: {
     width: 'auto',
     display: 'block', // Fix IE 11 issue.
     marginLeft: theme.spacing.unit * 3,
@@ -50,9 +52,58 @@ const styles = theme => ({
   submit: {
     marginTop: theme.spacing.unit * 3,
   },
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper,
+  },
+  gridList: {
+    flexWrap: 'nowrap',
+    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+    transform: 'translateZ(0)',
+  },
+  title: {
+    color: theme.palette.primary.light,
+  },
+  titleBar: {
+    background:
+      'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+  },
 });
-
 class SignIn extends React.Component{
+  render(){
+  const { classes } = this.props;
+
+
+   let tileData = [{
+      title: "notte blu",
+      titleBar: "piscina con lettini",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCzSk6oKATf6rLVwO4VRXwrGJWewpoqGq6n0Le4uzd8fCriTxFzQ"
+  },
+  {
+      title: "idromassaggio",
+      titleBar: "idromassaggio",
+      img: "https://www.sanguineto.it/images/phocagallery/centro_benessere/centro-benessere-montepulciano.jpg"
+  },
+  {
+      title: "massaggi schina",
+      titleBar: "massaggi schiena",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqqDRGyDBKgrpxMBKxKpD_EQFuoZ59AeS617gZToLFp9d5qHPd"
+
+  },
+  {
+      title: "viso",
+      titleBar: "trattamenti viso",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuMZ1W2T1Gn3oeAEssFvByJYxW_r7BYCkfpOIVcWfHXqu98gwb"
+  },
+  {
+      title: "BELLEZZA",
+      titleBar: "bellezza",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDtJwk4QoITQpr9LmaxxwC-CinfG5wnA3C-6TXoWm1xcsgfTwr"
+  }
+  ];
 
     constructor(props){
         super(props)
@@ -81,37 +132,7 @@ class SignIn extends React.Component{
         }
     }
 
-    render(){
-  const { classes } = this.props;
 
-
-   let tileData = [{
-      title: "notte blu",
-      titleBar: "piscina con lettini",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHapchqHryZQtRHaw_Pzvag8b6OhpBSANmIfm64ho7lOPl30P5"
-  },
-  {
-      title: "idromassaggio",
-      titleBar: "idromassaggio",
-      img: "https://www.sanguineto.it/images/phocagallery/centro_benessere/centro-benessere-montepulciano.jpg"
-  },
-  {
-      title: "massaggi schina",
-      titleBar: "massaggi schiena",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqqDRGyDBKgrpxMBKxKpD_EQFuoZ59AeS617gZToLFp9d5qHPd"
-
-  },
-  {
-      title: "viso",
-      titleBar: "trattamenti viso",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuMZ1W2T1Gn3oeAEssFvByJYxW_r7BYCkfpOIVcWfHXqu98gwb"
-  },
-  {
-      title: "BELLEZZA",
-      titleBar: "bellezza",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDtJwk4QoITQpr9LmaxxwC-CinfG5wnA3C-6TXoWm1xcsgfTwr"
-  }
-  ];
 
   if(this.state.redirect !== '')
     return (<Redirect push to={this.state.redirect}/>)
@@ -144,6 +165,15 @@ class SignIn extends React.Component{
             className={classes.submit}
           >
             Sign in
+          </Button>
+           <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="secondary"
+            className={classes.submit}
+          >
+            sing up
           </Button>
         </form>
       </Paper>
