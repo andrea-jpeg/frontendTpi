@@ -19,6 +19,7 @@ import {
   DateTimePicker,
   MuiPickersUtilsProvider,
   Calendar,
+  TimePicker,
   usePickerState,
 } from "@material-ui/pickers";
 import IconButton from '@material-ui/core/IconButton';
@@ -52,10 +53,12 @@ class EventoPage extends React.Component{
             eventi: [],
             open: false,
             id: null,
-            dataInizio: new Date(),
+            data: new Date(),
             maxDate: new Date(),
             minDate: new Date(),
             giorni: [],
+            changeToTimer: false,
+
         }
     }
 
@@ -76,7 +79,7 @@ class EventoPage extends React.Component{
             if(giorno === 'domenica') giorni.push(0);
         })
         this.setState({
-            open: true, 
+            open: true,
             id: elemento.id_evento,
             minDate: elemento.dataInizio,
             maxDate: elemento.dataFine,
@@ -97,7 +100,24 @@ class EventoPage extends React.Component{
 
         console.log(this.state.eventi)
 
-        let jsx = 
+        let jsxCalendar =
+                <Calendar {...{date: this.state.data, onChange:(date, isFinish)=>{this.setState({data: date})}}}
+                maxDate = {this.state.maxDate}
+                minDate = {this.state.minDate}
+                renderDay = {(day,selectedDate, dayInCurrentMonth, dayComponent)=> this.state.giorni.includes(day.getDay()) ? <IconButton disabled/> : dayComponent}
+                />
+
+        if(this.state.changeToTimer)
+            jsxCalendar =
+            <TimePicker
+                value = {this.state.data}
+                onChange = {(data)=>this.setState({data: data})}
+
+
+            />
+
+
+        let jsx =
         <Dialog
           open={this.state.open}
           TransitionComponent={Transition}
@@ -111,19 +131,15 @@ class EventoPage extends React.Component{
           </DialogTitle>
           <DialogContent>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Calendar {...{date: this.state.dataInizio, onChange:(date, isFinish)=>{this.setState({dataInizio: date})}}}
-                maxDate = {this.state.maxDate}
-                minDate = {this.state.minDate}
-                renderDay = {(day,selectedDate, dayInCurrentMonth, dayComponent)=> this.state.giorni.includes(day.getDay()) ? <IconButton disabled/> : dayComponent}
-                />
+                {jsxCalendar}
             </MuiPickersUtilsProvider>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
-              Disagree
+              Chiudi
             </Button>
-            <Button onClick={this.handleClose} color="primary">
-              Agree
+            <Button onClick={()=>this.setState({changeToTimer: true})} color="primary">
+              Accetta
             </Button>
           </DialogActions>
         </Dialog>
@@ -141,7 +157,7 @@ class EventoPage extends React.Component{
                     {elemento.nome}  {elemento.cognome}
                     </Typography>
                     <Typography className={classes.pos} color="textSecondary">
-                    
+
                     </Typography>
                 </CardContent>
                 <CardActions>
