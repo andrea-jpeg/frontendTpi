@@ -219,7 +219,18 @@ class AddPrenotazione extends React.Component{
                 <Button variant="contained" className={classes.button} onClick={()=>this.handleSubmit()}>
                     Invia
                 </Button>
+                  <Paper className = {classes.paper} elevation={4}>
+                  <Typography variant='h2'>LUNEDI : 8:00-18.00 </Typography>
+                  <Typography variant='h2'>MARTEDI : 8:00-18.00</Typography>
+                  <Typography variant='h2'>MERCOLEDI : 8:00-18.00</Typography>
+                  <Typography variant='h2'>GIOVEDI : 8:00-18.00</Typography>
+                  <Typography variant='h2'>VENERDI : 8:00-18.00</Typography>
+                  <Typography variant='h2'>SABATO : 8:00-18.00</Typography>
+                  <Typography variant='h2'>DOMENICA : 8:00-18.00</Typography>
+                  <Typography variant='h2'>LUNEDI : 8:00-18.00</Typography>
+                  <Typography variant='h2'>SE NON PAGHI LE MIE TROIE TI DISFO DI BOTTE</Typography>
 
+                  </Paper>
             </Paper>
             </div>
         )
