@@ -93,7 +93,7 @@ class SignIn extends React.Component{
                 } //gestione dell'errore nell'else l'errore sarà contenuto in res.errore, cancellare i campi e visualizzare l'errore
             });
 
-        if(localStorage.getItem('linkThenLogin') !== 'null'){
+        if(localStorage.getItem('linkThenLogin') !== null){
             var link = localStorage.getItem('linkThenLogin');
             localStorage.setItem('linkThenLogin', null);
             this.setState({redirect: link});
