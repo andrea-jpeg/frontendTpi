@@ -50,29 +50,7 @@ const styles = theme => ({
   },
 });
 
-const ranges = [
-    {
-        value: '5',
-    },
-    {
-        value: '10',
-    },
-    {
-        value: '20',
-    },
-    {
-        value: '30',
-    },
-    {
-        value: '40',
-    },
-    {
-        value: '60',
-    },
-    {
-        value: '120',
-    },
-]
+
 
 class AddPrenotazione extends React.Component{
 
@@ -81,14 +59,6 @@ class AddPrenotazione extends React.Component{
         this.state = {
             startDate: new Date(),
             finishDate: new Date(),
-            lunedi: false,
-            martedi: false,
-            mercoledi: false,
-            giovedi: false,
-            venerdi: false,
-            sabato: false,
-            domenica: false,
-            intervalloMinuti: 0,
             redirect: '',
         }
     }
@@ -102,23 +72,12 @@ class AddPrenotazione extends React.Component{
   };
 
     handleSubmit(){
-        var giorni = '';
-        if(this.state.lunedi) giorni += 'lunedi,';
-        if(this.state.martedi) giorni += 'martedi,';
-        if(this.state.mercoledi) giorni += 'mercoledi,';
-        if(this.state.giovedi) giorni += 'giovedi,';
-        if(this.state.venerdi) giorni += 'venerdi,';
-        if(this.state.sabato) giorni += 'sabato,';
-        if(this.state.domenica) giorni += 'domenica,';
-        if(giorni.length > 0) giorni.substr(0, giorni.length-1); // per canellare l'ultima virgola in eccesso
         console.log(localStorage.getItem('token'));
-        if(localStorage.getItem('token') === null){
+        if(localStorage.getItem('token') === null || localStorage.getItem('token') === 'null'){
             localStorage.setItem('linkThenLogin', '/addPrenotazione');
             this.setState({redirect: '/'})
         }
-        else
-            Fetch.addEvento(localStorage.getItem('token'), this.state.startDate, this.state.finishDate, giorni, this.state.intervalloMinuti)
-                .then(res => console.log(res))
+        //elese fare la fetch per aggiungere l'evento
     }
 
 
@@ -148,63 +107,7 @@ class AddPrenotazione extends React.Component{
                     </MuiPickersUtilsProvider>
                 </Typography>
 
-                <Typography>Seleziona i giorni :</Typography>
-                <Typography>
-                    <Checkbox
-                        checked={this.state.lunedi}
-                        onChange={this.handleChange('lunedi')}
-                        value="checkedA"
-                    /> lunedi
-                    <Checkbox
-                        checked={this.state.martedi}
-                        onChange={this.handleChange('martedi')}
-                        value="martedi"
-                    /> martedi
-                    <Checkbox
-                        checked={this.state.mercoledi}
-                        onChange={this.handleChange('mercoledi')}
-                        value="mercoledi"
-                    /> mercoledi
-                    <Checkbox
-                        checked={this.state.giovedi}
-                        onChange={this.handleChange('giovedi')}
-                        value="giovedi"
-                    /> giovedi
-                    <Checkbox
-                        checked={this.state.venerdi}
-                        onChange={this.handleChange('venerdi')}
-                        value="venerdi"
-                    /> venerdi
-                    <Checkbox
-                        checked={this.state.sabato}
-                        onChange={this.handleChange('sabato')}
-                        value="sabato"
-                    /> sabato
-                    <Checkbox
-                        checked={this.state.domenica}
-                        onChange={this.handleChange('domenica')}
-                        value="domenica"
-                    /> domenica
-                </Typography>
-                <Typography>
-                inserire durata appuntamento desiderata:
-                    <TextField
-                    select
-                    label=""
-                    className={(classes.margin, classes.textField)}
-                    value={this.state.intervalloMinuti}
-                    onChange={this.handleChangeName('intervalloMinuti')}
-                    InputProps={{
-                        endAdornment: <InputAdornment position="end">min</InputAdornment>,
-                    }}
-                    >
-                    {ranges.map(option => (
-                        <MenuItem key={option.value} value={option.value}>
-                        {option.value}
-                        </MenuItem>
-                    ))}
-                    </TextField>
-                </Typography>
+
                 <Button variant="contained" className={classes.button} onClick={()=>this.handleSubmit()}>
                     Invia
                 </Button>
