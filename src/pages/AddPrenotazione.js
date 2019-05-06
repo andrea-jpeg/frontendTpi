@@ -217,7 +217,7 @@ class AddPrenotazione extends React.Component{
                   <Typography variant='h6'>VENERDI : 8:00-18.00</Typography>
                   <Typography variant='h6'>SABATO : 8:00-18.00</Typography>
                   <Typography variant='h6'>DOMENICA : 8:00-18.00</Typography>
-                  <Typography variant='h6'>LUNEDI : 8:00-18.00</Typography>
+
 
 
                   </Paper>
