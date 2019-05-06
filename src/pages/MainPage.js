@@ -167,17 +167,21 @@ class SignIn extends React.Component{
           >
             Sign in
           </Button>
-           <Button
+
+
+        </form>
+         <Button
             type="submit"
             fullWidth
             variant="contained"
             color="secondary"
             className={classes.submit}
+            onClick = {()=>{
+                this.setState({ redirect:'/registrazione'})
+            }}
           >
             sing up
           </Button>
-
-        </form>
       </Paper>
        <div className={classes.root}>
       <GridList className={classes.gridList} cols={2.5}>

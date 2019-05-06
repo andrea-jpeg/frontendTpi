@@ -17,6 +17,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
+import { Redirect } from 'react-router-dom';
 
 const styles = theme => ({
   main: {
@@ -71,6 +72,13 @@ const styles = theme => ({
 });
 
 class Registration extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            redirect: ''
+        }
+
+    }
  render(){
   const { classes } = this.props;
 
@@ -101,6 +109,8 @@ class Registration extends React.Component {
       img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDtJwk4QoITQpr9LmaxxwC-CinfG5wnA3C-6TXoWm1xcsgfTwr"
   }
   ];
+   if(this.state.redirect !== '')
+    return (<Redirect push to={this.state.redirect}/>)
 
   return (
     <main className={classes.main}>
@@ -118,11 +128,11 @@ class Registration extends React.Component {
         <form className={classes.form}>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input id="email" name="email" autoComplete="email" autoFocus />
+            <Input id="email" name="email" onChange={(e)=>this.setState({email: e.target.value})} autoComplete="email" autoFocus value={this.state.email}  />
           </FormControl>
            <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="nome">nome</InputLabel>
-            <Input id="name" name="name" autoComplete="name" autoFocus />
+            <Input id="nome" name="nome" onChange={(e)=>this.setState({nome: e.target.value})} autoComplete="nome" autoFocus value={this.state.nome}  />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="cognome">cognome</InputLabel>
@@ -133,15 +143,7 @@ class Registration extends React.Component {
             <Input name="password" type="password" id="password" autoComplete="current-password" />
           </FormControl>
 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign in
-          </Button>
+
           <Button
             type="submit"
             fullWidth
@@ -151,7 +153,20 @@ class Registration extends React.Component {
           >
             sing up
           </Button>
+
         </form>
+         <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick = {()=>{
+                this.setState({ redirect:'/'})
+            }}
+          >
+            Sign in
+          </Button>
 
       </Paper>
 
