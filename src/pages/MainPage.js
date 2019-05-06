@@ -80,6 +80,7 @@ class SignIn extends React.Component{
             password: '',
             redirect: '',
         }
+        localStorage.getItem('linkThenLogin', '/addPrenotazione')
     }
 
     handleSubmit(e){
