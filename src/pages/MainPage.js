@@ -75,29 +75,39 @@ main: {
 class SignIn extends React.Component{
       constructor(props){
         super(props)
+        localStorage.setItem('token', null)
         this.state = {
             email: '',
             password: '',
             redirect: '',
+            errore: '',
         }
-        localStorage.getItem('linkThenLogin', '/addPrenotazione')
+        localStorage.setItem('linkThenLogin', '/addPrenotazione')
     }
 
     handleSubmit(e){
         e.preventDefault();
         Fetch.login(this.state.email, this.state.password)
             .then(res => {
-                console.log(res.errore)
+                console.log(res.error)
+                if(res.error !== undefined){
+                    this.setState({errore: res.error})
+                }
                 if(res.token !== undefined){
                     localStorage.setItem('token', res.token)
-                    console.log('loggato')
-                } //gestione dell'errore nell'else l'errore sarà contenuto in res.errore, cancellare i campi e visualizzare l'errore
-            });
+                }
+            })
+            .catch(err =>{
+                this.setState({errore : 'Il server non è disponibile'})
+            })
 
-        if(localStorage.getItem('linkThenLogin') !== null){
+        console.log(localStorage.getItem('token'))
+        if(localStorage.getItem('token') !== null && localStorage.getItem('token') !== 'null'){
             var link = localStorage.getItem('linkThenLogin');
-            localStorage.setItem('linkThenLogin', null);
-            this.setState({redirect: link});
+            if(link !== null && link !== 'null')
+                this.setState({redirect: link});
+            else
+                this.setState({redirect: '/addprenotazione'});
         }
     }
   render(){
@@ -158,6 +168,7 @@ class SignIn extends React.Component{
             <InputLabel htmlFor="password">Password</InputLabel>
             <Input name="password" type="password" id="password" onChange={(e)=>this.setState({password: e.target.value})} value={this.state.password} autoComplete="current-password" />
           </FormControl>
+          <Typography color='error'>{this.state.errore}</Typography>
 
           <Button
             type="submit"
