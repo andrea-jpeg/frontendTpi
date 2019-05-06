@@ -112,7 +112,7 @@ class AddPrenotazione extends React.Component{
         if(this.state.domenica) giorni += 'domenica,';
         if(giorni.length > 0) giorni.substr(0, giorni.length-1); // per canellare l'ultima virgola in eccesso
         console.log(localStorage.getItem('token'));
-        if(localStorage.getItem('token') === 'null'){
+        if(localStorage.getItem('token') === null){
             localStorage.setItem('linkThenLogin', '/addPrenotazione');
             this.setState({redirect: '/'})
         }
