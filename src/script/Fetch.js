@@ -1,4 +1,4 @@
-const url = 'https://3000-a65577b3-33c4-42df-930b-d29998fee453.ws-eu0.gitpod.io';
+const url = 'https://3000-a92570c3-11ba-484d-806e-766171748948.ws-eu0.gitpod.io';
 class Fetch{
 
     static registration(nome, cognome, email, password){
@@ -13,8 +13,8 @@ class Fetch{
                         'email': email,
                         'password': password
                         })
-
-                )
+                })
+                ).then(res => res.json())
             })
         )
     }
@@ -29,6 +29,25 @@ class Fetch{
                     'password': password,
                 })
             }).then(res => res.json())
+            )
+        })
+    }
+
+    static addPrenotazione(token, dataInizio){
+        return new Promise((resolve, reject) =>{
+            resolve(
+                fetch(url+'/prenotazione',{
+                    method: 'POST',
+                    headers: new Headers({
+                            'Authorization': 'Bearer '+ token,
+                            'Content-Type':'application/json'
+                    }),
+                    body: JSON.stringify({
+                        'dataInizio' : dataInizio,
+                        'token' : token,
+                    })
+                }).then(res => res.json())
+
             )
         })
     }
