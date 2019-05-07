@@ -136,11 +136,11 @@ class Registration extends React.Component {
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="cognome">cognome</InputLabel>
-            <Input id="cognome" name="cognme" autoComplete="cognome" autoFocus />
+            <Input id="cognome" name="cognome"  onChange={(e)=>this.setState({cognome: e.target.value})} autoComplete="cognome" autoFocus value={this.state.email} autoComplete="cognome" autoFocus />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="password">Password</InputLabel>
-            <Input name="password" type="password" id="password" autoComplete="current-password" />
+            <Input name="password" type="password"  onChange={(e)=>this.setState({password: e.target.value})} autoComplete="password" autoFocus value={this.state.email}id="password" autoComplete="current-password" />
           </FormControl>
 
 
@@ -151,7 +151,7 @@ class Registration extends React.Component {
             color="secondary"
             className={classes.submit}
           >
-            sing up
+            Sign up
           </Button>
 
         </form>
