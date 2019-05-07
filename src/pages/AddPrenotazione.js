@@ -57,8 +57,7 @@ class AddPrenotazione extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            startDate: new Date(),
-            finishDate: new Date(),
+            data: new Date(),
             redirect: '',
         }
     }
@@ -77,7 +76,9 @@ class AddPrenotazione extends React.Component{
             localStorage.setItem('linkThenLogin', '/addPrenotazione');
             this.setState({redirect: '/'})
         }
-        //elese fare la fetch per aggiungere l'evento
+        else{
+            Fetch.addPrenotazione(localStorage.getItem('token'), this.state.data);
+        }
     }
 
 
@@ -97,12 +98,12 @@ class AddPrenotazione extends React.Component{
                 <Typography className={classes.typography}>Data disponibilità:
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <DateTimePicker
-                        value={this.state.startDate}
-                        onChange={(date)=>this.setState({startDate: date})}
+                        value={this.state.data}
+                        onChange={(date)=>this.setState({data: new Date(date.getTime())})}
                         ampm = {false}
                         animateYearScrolling
                         disablePast
-                        minutesStep = {5}
+                        minutesStep = {30}
                         />
                     </MuiPickersUtilsProvider>
                 </Typography>
