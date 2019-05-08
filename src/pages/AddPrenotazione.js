@@ -59,6 +59,8 @@ class AddPrenotazione extends React.Component{
         this.state = {
             data: new Date(),
             redirect: '',
+            color: 'default',
+            message: '',
         }
     }
 
@@ -77,7 +79,14 @@ class AddPrenotazione extends React.Component{
             this.setState({redirect: '/'})
         }
         else{
-            Fetch.addPrenotazione(localStorage.getItem('token'), this.state.data);
+            Fetch.addPrenotazione(localStorage.getItem('token'), this.state.data)
+                .then(res => {
+                    if(res.type === 'error')
+                        this.setState({message: res.message, color : 'error'})
+                    else
+                        this.setState({message: res.message, color: 'default'});
+
+                });
         }
     }
 
@@ -112,6 +121,7 @@ class AddPrenotazione extends React.Component{
                 <Button variant="contained" className={classes.button} onClick={()=>this.handleSubmit()}>
                     Invia
                 </Button>
+                <Typography color = {this.state.color}>{this.state.message}</Typography>
                   <Paper className = {classes.paper} elevation={4}>
                   <Typography variant='h6'>ORARI: </Typography>
                   <Typography variant='h6'>LUNEDI : 8:00-18.00 </Typography>
