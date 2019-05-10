@@ -7,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Fetch from '../script/Fetch.js';
 
 const styles = theme => ({
   root: {
@@ -22,9 +23,46 @@ const styles = theme => ({
 class MyPrenotazioni extends  React.Component{
     constructor(props){
         super(props);
+        this.state = {
+            elementi: [],
+        }
     }
 
+    componentDidMount(){
+        Fetch.getPrenotazioni(localStorage.getItem('token'))
+            .then(res => this.setState({elementi : res}));
+    }
+
+    getData(elemento){
+        return this.formatDate(new Date(elemento.data))
+    }
+
+    getMinutes(elemento){
+        var data = new Date(elemento.data);
+        return ''+data.getHours()+' : '+data.getMinutes();
+    }
+
+     formatDate(date) {
+  var monthNames = [
+    "January", "February", "March",
+    "April", "May", "June", "July",
+    "August", "September", "October",
+    "November", "December"
+  ];
+
+  var day = date.getDate();
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+
+  return day + ' ' + monthNames[monthIndex] + ' ' + year;
+}
+
+
     render(){
+        const {classes} = this.props;
+        console.log(this.state);
+
+
         return(
             <Paper className={classes.root}>
       <Table className={classes.table}>
@@ -32,6 +70,7 @@ class MyPrenotazioni extends  React.Component{
           <TableRow>
             <TableCell>Nome</TableCell>
             <TableCell align="right">Data</TableCell>
+            <TableCell align = 'right'>Ora</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -40,8 +79,8 @@ class MyPrenotazioni extends  React.Component{
               <TableCell component="th" scope="row">
                 {elemento.email}
               </TableCell>
-              <TableCell align="right">{elemento.data}</TableCell>
-
+              <TableCell align="right">{this.getData(elemento)}</TableCell>
+            <TableCell align="right">{this.getMinutes(elemento)}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -50,4 +89,4 @@ class MyPrenotazioni extends  React.Component{
         )
     }
 }
-export default withStyle(styles)(MyPrenotazioni);
+export default withStyles(styles)(MyPrenotazioni);
