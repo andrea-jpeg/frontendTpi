@@ -81,6 +81,8 @@ class Registration extends React.Component {
             cognome: '',
             email: '',
             password: '',
+            message: '',
+            redirect: '',
         }
 
     }
@@ -88,7 +90,14 @@ class Registration extends React.Component {
 handleSubmit(e){
     e.preventDefault();
     Fetch.registration(this.state.nome, this.state.cognome, this.state.email, this.state.password)
-        .then(res => console.log(res))
+        .then(res => {
+            if (res.error !== undefined){
+                this.setState({message: res.error})
+            }
+            if(res.token !== undefined){
+                this.setState({redirect : '/addPrenotazione'})
+            }
+        })
 }
 
 
@@ -155,7 +164,7 @@ handleSubmit(e){
             <InputLabel htmlFor="password">Password</InputLabel>
             <Input name="password" type="password"  onChange={(e)=>this.setState({password: e.target.value})} autoComplete="password" autoFocus value={this.state.password}id="password" autoComplete="current-password" />
           </FormControl>
-
+            <Typography color='error'>{this.state.errore}</Typography>
 
           <Button
             type="submit"

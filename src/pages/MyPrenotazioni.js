@@ -8,6 +8,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Fetch from '../script/Fetch.js';
+import { Typography } from '@material-ui/core';
+import {Redirect} from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   root: {
@@ -25,6 +28,7 @@ class MyPrenotazioni extends  React.Component{
         super(props);
         this.state = {
             elementi: [],
+            redirect : ''
         }
     }
 
@@ -61,10 +65,16 @@ class MyPrenotazioni extends  React.Component{
     render(){
         const {classes} = this.props;
         console.log(this.state);
-
+        if(this.state.redirect !== '')
+            return (<Redirect push to={this.state.redirect}/>)
 
         return(
             <Paper className={classes.root}>
+            <Typography variant ='h3'>Calendario Appuntamenti
+                <Button variant="contained" className={classes.button} onClick={()=>this.setState({redirect: '\addPrenotazione'})}>
+                    Prenotati
+                </Button>
+            </Typography>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
