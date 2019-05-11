@@ -89,15 +89,19 @@ class Registration extends React.Component {
 
 handleSubmit(e){
     e.preventDefault();
-    Fetch.registration(this.state.nome, this.state.cognome, this.state.email, this.state.password)
-        .then(res => {
-            if (res.error !== undefined){
-                this.setState({message: res.error})
-            }
-            if(res.token !== undefined){
-                this.setState({redirect : '/addPrenotazione'})
-            }
-        })
+    if(this.state.email.includes('@'))
+        Fetch.registration(this.state.nome, this.state.cognome, this.state.email, this.state.password)
+            .then(res => {
+                if (res.error !== undefined){
+                    this.setState({message: res.error})
+                }
+                if(res.token !== undefined){
+                    this.setState({redirect : '/addPrenotazione'})
+                }
+            })
+    else
+        this.setState({message : "metti la @ nell'email"})
+
 }
 
 
