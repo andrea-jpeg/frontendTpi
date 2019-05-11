@@ -18,6 +18,7 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import { Redirect } from 'react-router-dom';
+import Fetch from '../script/Fetch.js';
 
 const styles = theme => ({
   main: {
@@ -75,10 +76,22 @@ class Registration extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            redirect: ''
+            redirect: '',
+            nome: '',
+            cognome: '',
+            email: '',
+            password: '',
         }
 
     }
+
+handleSubmit(e){
+    e.preventDefault();
+    Fetch.registration(this.state.nome, this.state.cognome, this.state.email, this.state.password)
+        .then(res => console.log(res))
+}
+
+
  render(){
   const { classes } = this.props;
 
@@ -125,7 +138,7 @@ class Registration extends React.Component {
         <Typography component="h1" variant="h5">
           sign up
         </Typography>
-        <form className={classes.form}>
+        <form className={classes.form} onSubmit={(e)=>this.handleSubmit(e)}>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="email">Email Address</InputLabel>
             <Input id="email" name="email" onChange={(e)=>this.setState({email: e.target.value})} autoComplete="email" autoFocus value={this.state.email}  />
@@ -136,11 +149,11 @@ class Registration extends React.Component {
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="cognome">cognome</InputLabel>
-            <Input id="cognome" name="cognome"  onChange={(e)=>this.setState({cognome: e.target.value})} autoComplete="cognome" autoFocus value={this.state.email} autoComplete="cognome" autoFocus />
+            <Input id="cognome" name="cognome"  onChange={(e)=>this.setState({cognome: e.target.value})} autoComplete="cognome" autoFocus value={this.state.cognome} autoComplete="cognome" autoFocus />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="password">Password</InputLabel>
-            <Input name="password" type="password"  onChange={(e)=>this.setState({password: e.target.value})} autoComplete="password" autoFocus value={this.state.email}id="password" autoComplete="current-password" />
+            <Input name="password" type="password"  onChange={(e)=>this.setState({password: e.target.value})} autoComplete="password" autoFocus value={this.state.password}id="password" autoComplete="current-password" />
           </FormControl>
 
 

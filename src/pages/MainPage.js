@@ -75,7 +75,6 @@ main: {
 class SignIn extends React.Component{
       constructor(props){
         super(props)
-        localStorage.setItem('token', null)
         this.state = {
             email: '',
             password: '',
