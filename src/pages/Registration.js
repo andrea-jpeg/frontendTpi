@@ -51,7 +51,7 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 3,
   },
   root: {
-    backgroundImage:'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3AFYGh4BUEJp1ECvV6EkIA2TbIdo_5-pa2oNQ-b3P0OtQCgK_Eg)',
+
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
