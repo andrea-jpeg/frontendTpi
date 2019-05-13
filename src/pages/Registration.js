@@ -89,6 +89,7 @@ class Registration extends React.Component {
 
 handleSubmit(e){
     e.preventDefault();
+    this.setState({message: ''})
     if(this.state.email.includes('@'))
         Fetch.registration(this.state.nome, this.state.cognome, this.state.email, this.state.password)
             .then(res => {
@@ -168,7 +169,7 @@ handleSubmit(e){
             <InputLabel htmlFor="password">Password</InputLabel>
             <Input name="password" type="password"  onChange={(e)=>this.setState({password: e.target.value})} autoComplete="password" autoFocus value={this.state.password}id="password" autoComplete="current-password" />
           </FormControl>
-            <Typography color='error'>{this.state.errore}</Typography>
+            <Typography color='error'>{this.state.message}</Typography>
 
           <Button
             type="submit"
