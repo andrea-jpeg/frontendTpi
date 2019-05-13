@@ -118,10 +118,11 @@ class AddPrenotazione extends React.Component{
                 </Typography>
 
 
-                <Button variant="contained" className={classes.button} onClick={()=>this.handleSubmit()}>
+                <Button variant="contained" className={classes.button} onClick={()=>this.handleSubmit()}   color="primary">
+
                     Invia
                 </Button>
-                <Button variant="contained" className={classes.button} onClick={()=>this.setState({redirect : '\prenotazioni'})}>
+                <Button variant="contained" className={classes.button} onClick={()=>this.setState({redirect : '\prenotazioni'})} color="secondary">
                     Visualizza le mie prenotazioni
                 </Button>
                 <Typography color = {this.state.color}>{this.state.message}</Typography>

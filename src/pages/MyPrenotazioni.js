@@ -71,8 +71,8 @@ class MyPrenotazioni extends  React.Component{
         return(
             <Paper className={classes.root}>
             <Typography variant ='h3'>Calendario Appuntamenti
-                <Button variant="contained" className={classes.button} onClick={()=>this.setState({redirect: '\addPrenotazione'})}>
-                    Prenotati
+                <Button variant="contained" className={classes.button} onClick={()=>this.setState({redirect: '\addPrenotazione'})}   color="secondary">
+                    prenotati
                 </Button>
             </Typography>
       <Table className={classes.table}>

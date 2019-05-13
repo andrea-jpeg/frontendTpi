@@ -135,8 +135,8 @@ class SignIn extends React.Component{
       img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuMZ1W2T1Gn3oeAEssFvByJYxW_r7BYCkfpOIVcWfHXqu98gwb"
   },
   {
-      title: "BELLEZZA",
-      titleBar: "bellezza",
+      title: "milf",
+      titleBar: "milf",
       img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDtJwk4QoITQpr9LmaxxwC-CinfG5wnA3C-6TXoWm1xcsgfTwr"
   }
   ];
@@ -191,7 +191,7 @@ class SignIn extends React.Component{
                 this.setState({ redirect:'/registrazione'})
             }}
           >
-            sing up
+            sign up
           </Button>
       </Paper>
        <div className={classes.root}>
