@@ -56,7 +56,7 @@ class Fetch{
                 method: 'GET',
                 headers: new Headers({
                             'Authorization': 'Bearer '+ token,
-                            'Content-Type':'application/json'
+                            'Content-Type':'application/json',
                     }),
             }).then(res => res.json())
             )
